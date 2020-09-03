@@ -61,12 +61,12 @@ class osuAPI {
         console.log(error);
         return { error: error }; // throw new Error(error);
       });
-    if ("error" in data) {
-      return undefined;
-    }
+
     if (data.authentication == "basic") {
       await Auth();
       this.user(id);
+    } else if ("error" in data) {
+      return undefined;
     } else {
       return data;
     }
@@ -109,12 +109,11 @@ class osuAPI {
         console.log(error);
         return { error: error }; // throw new Error(error);
       });
-    if ("error" in data) {
-      return undefined;
-    }
     if (data.authentication == "basic") {
       await Auth();
-      this.recentActivity(id);
+      this.user(id);
+    } else if ("error" in data) {
+      return undefined;
     } else {
       return data;
     }
@@ -157,12 +156,11 @@ class osuAPI {
         console.log(error);
         return { error: error }; // throw new Error(error);
       });
-    if ("error" in data) {
-      return undefined;
-    }
     if (data.authentication == "basic") {
       await Auth();
-      this.recentActivity(id);
+      this.user(id);
+    } else if ("error" in data) {
+      return undefined;
     } else {
       return data;
     }
