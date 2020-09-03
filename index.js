@@ -11,8 +11,6 @@ bot.start(async (ctx) => {
   ctx.reply("Hello, this bot created for getting user pages from osu.");
 });
 
-bot.hears("hello", (ctx) => ctx.reply("Hey!"));
-
 bot.command("user", async (ctx) => {
   let userId = ctx.message.text.split(" ")
     ? ctx.message.text.split(" ")[1]
@@ -34,4 +32,8 @@ bot.command("user", async (ctx) => {
   let activity = await osu.recentActivity(user);
 });
 
-bot.launch();
+if (proccess.env.REPL_URL) {
+  require("./express.js").startListen(bot, process.env.PORT);
+} else {
+  bot.launch();
+}
